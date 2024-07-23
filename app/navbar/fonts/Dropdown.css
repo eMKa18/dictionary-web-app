@@ -1,0 +1,70 @@
+.select-with-svg-arrow {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent url(/images/icon-arrow-down.svg) no-repeat right center;
+    padding-right: 30px;
+    border: none;
+    outline: none;
+}
+
+.select-with-svg-arrow option {
+    border: none; /* Attempt to remove the border */
+    border-radius: 5px; /* Attempt to round the corners */
+  }
+  
+  /* Style for the hover state */
+  .select-with-svg-arrow option:hover {
+    background-color: rgba(128, 128, 128, 0.2); /* Light gray background on hover */
+  }
+
+/* CustomDropdown */
+
+  .dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown-header {
+    padding: 10px;
+    cursor: pointer;
+    /* for arrow purposes */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .dropdown-header:focus {
+    border: none;
+  }
+  
+  .dropdown-list-container {
+    position: absolute;
+    width: 100%;
+  }
+  
+  .dropdown-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-list-item {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown-list-item:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .dropdown-arrow {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    margin-left: 8px; /* Adjust spacing as needed */
+    transition: transform 0.3s ease;
+  }
+
+  .dropdown-arrow.rotate {
+    transform: rotate(180deg);
+  }
+  

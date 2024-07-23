@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
+import Dropdown from "./Dropdown";
+import { CustomDropdown } from "./CustomDropdown";
 
+const fonts = ["Arial", "Verdana", "Helvetica", "Times New Roman"];
 const FontsDropdown = () => {
   const [selectedFont, setSelectedFont] = useState("Arial");
-
-  const fonts = ["Arial", "Verdana", "Helvetica", "Times New Roman"];
 
   const handleFontChange = (event: {
     target: { value: React.SetStateAction<string> };
@@ -27,4 +28,8 @@ const FontsDropdown = () => {
   );
 };
 
-export { FontsDropdown };
+const TempFontsDropdown = () => {
+  return <CustomDropdown options={fonts} />;
+};
+
+export { FontsDropdown, TempFontsDropdown };

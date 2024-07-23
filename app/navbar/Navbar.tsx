@@ -4,7 +4,7 @@ import Image from "next/image";
 import "./Navbar.css";
 
 import { ModeSwitch } from "./darkmode/ModeSwitch";
-import { FontsDropdown } from "./fonts/FontsDropdown";
+import { FontsDropdown, TempFontsDropdown } from "./fonts/FontsDropdown";
 
 const Navbar = () => {
   return (
@@ -20,7 +20,7 @@ const Navbar = () => {
           />
         </Link>
         <div className="flex items-center">
-          <FontsDropdown />
+          <TempFontsDropdown />
           <div className="border-r border-gray-500 mx-3 h-8"></div>
           <ModeSwitch />
         </div>
