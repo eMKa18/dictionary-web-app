@@ -1,0 +1,15 @@
+/* This is an example of using @apply directive with Tailwind CSS in your global stylesheet */
+@media (max-width: 640px) {
+    .nav-mobile {
+        @apply w-full flex-row items-start;
+    }
+}
+
+.toggle-checkbox:checked {
+    @apply: right-0 border-green-400;
+    @apply: +right-0; /* Move the toggle to the right when checked */
+}
+
+.toggle-checkbox:checked + .toggle-label {
+    @apply: bg-green-400;
+}
