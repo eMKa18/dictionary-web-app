@@ -13,7 +13,7 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
     setIsOpen(false);
   };
 
-  const onKeyDown = (event) => {
+  const onKeyDown = (event: { keyCode: number }) => {
     if (event.keyCode === 27) {
       // Escape key
       setIsOpen(false);
