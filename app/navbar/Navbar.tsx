@@ -3,8 +3,26 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { FiSun, FiMoon } from "react-icons/fi";
 import "./Navbar.css";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "../../tailwind.config";
+
+import { SVGProps } from "react";
+const MoonIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} {...props}>
+    <path
+      fill="none"
+      stroke={props.stroke || "#838383"}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M1 10.449a10.544 10.544 0 0 0 19.993 4.686C11.544 15.135 6.858 10.448 6.858 1A10.545 10.545 0 0 0 1 10.449Z"
+    />
+  </svg>
+);
+// export { SvgComponent as ReactComponent };
+const fullConfig = resolveConfig(tailwindConfig);
+const activeColor = fullConfig.theme.colors.active;
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
@@ -48,33 +66,29 @@ const Navbar = () => {
               </option>
             ))}
           </select>
-          <div className="border-r border-gray-300 mx-3 h-6"></div>
+          <div className="border-r border-gray-500 mx-3 h-8"></div>
           <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
             <input
               type="checkbox"
               name="toggle"
               id="toggle"
-              className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out"
+              className={`toggle-checkbox absolute block w-6 h-6 rounded-full appearance-none cursor-pointer transition-transform duration-200 ease-in-out ${isDarkMode ? " bg-active" : "border-inactive bg-inactive"}`}
               checked={isDarkMode}
               onChange={toggleDarkMode}
             />
+            {/* This makes a background of toggle, trick is that there is no label text, instead we have the span with a dot which is representing a state of selection */}
             <label
               htmlFor="toggle"
-              className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-            ></label>
-            <span
-              className={`absolute top-0 left-0 w-6 h-6 rounded-full transition-transform duration-200 ease-in-out transform ${
-                isDarkMode
-                  ? "translate-x-full bg-blue-600"
-                  : "translate-x-0 bg-gray-400"
-              }`}
-            ></span>
+              className={`toggle-label block overflow-hidden w-10 h-6 rounded-full cursor-pointer ${isDarkMode ? "bg-active" : "bg-inactive"}`}
+            >
+              <span
+                className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform duration-200 ease-in-out transform ${
+                  isDarkMode ? "translate-x-4" : "translate-x-0"
+                }`}
+              ></span>
+            </label>
           </div>
-          {isDarkMode ? (
-            <FiMoon className="text-yellow-500" size={24} />
-          ) : (
-            <FiSun className="text-gray-500" size={24} />
-          )}
+          {isDarkMode ? <MoonIcon stroke={activeColor} /> : <MoonIcon />}
         </div>
       </nav>
     </div>
