@@ -1,3 +1,4 @@
+"use client";
 import { useTheme } from "next-themes";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../../tailwind.config";
