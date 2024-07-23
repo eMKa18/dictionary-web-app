@@ -12,13 +12,6 @@
   --background-rgb: 5, 5, 5;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 0, 0, 0;
-  }
-} */
-
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
@@ -27,9 +20,3 @@ body {
   max-height: 100vh;
   max-height: 100dvh;
 }
-
-/* @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-} */
