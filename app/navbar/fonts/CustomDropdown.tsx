@@ -34,7 +34,7 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
   }, []);
 
   return (
-    <div className="relative mr-1">
+    <div className="relative mr-1" ref={dropdownRef}>
       <div
         className="p-2.5 cursor-pointer flex items-center content-between font-bold"
         onClick={toggling}
