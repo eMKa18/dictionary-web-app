@@ -1,6 +1,0 @@
-/* This is an example of using @apply directive with Tailwind CSS in your global stylesheet */
-@media (max-width: 390px) {
-    .nav-mobile {
-        @apply w-full flex-row items-start;
-    }
-}

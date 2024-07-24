@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import "./Navbar.css";
 
 import { ModeSwitch } from "./darkmode/ModeSwitch";
 import { FontsDropdown, TempFontsDropdown } from "./fonts/FontsDropdown";
@@ -9,7 +8,7 @@ import { FontsDropdown, TempFontsDropdown } from "./fonts/FontsDropdown";
 const Navbar = () => {
   return (
     <div className="flex justify-center w-full">
-      <nav className="w-1/2 flex justify-between items-center nav-mobile">
+      <nav className="flex justify-between items-center w-full">
         <Link href="/">
           <Image
             src="/images/logo.svg"
