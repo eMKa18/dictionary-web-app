@@ -36,7 +36,7 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
   return (
     <div className="relative mr-1">
       <div
-        className="p-2.5 cursor-pointer flex items-center content-between focus:border-none"
+        className="p-2.5 cursor-pointer flex items-center content-between font-bold"
         onClick={toggling}
         onKeyDown={onKeyDown}
         tabIndex={0}
@@ -51,7 +51,7 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
           <ul className="list-none p-0 m-0 rounded-lg shadow-md dark:shadow-none dark:border dark:border-active">
             {options.map((option) => (
               <li
-                className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-active"
+                className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-active font-bold"
                 onClick={onOptionClicked(option)}
                 key={option}
               >

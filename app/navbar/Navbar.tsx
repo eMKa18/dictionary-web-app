@@ -21,7 +21,7 @@ const Navbar = () => {
         </Link>
         <div className="flex items-center">
           <FontsDropdown fonts={fonts} />
-          <div className="border-r border-gray-500 mx-3 h-8"></div>
+          <div className="border-r border-gray-200 dark:border-white mx-3 h-8"></div>
           <ModeSwitch />
         </div>
       </nav>
