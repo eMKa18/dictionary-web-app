@@ -22,15 +22,12 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
   };
 
   const handleClickOutside = (event: { target: any }) => {
-    console.log("clicking outside");
-    console.log(dropdownRef.current);
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    console.log("adding listener");
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
