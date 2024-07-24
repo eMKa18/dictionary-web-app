@@ -5,6 +5,7 @@
 :root {
   --foreground-rgb: 5, 5, 5;
   --background-rgb: 255, 255, 255;
+  --radius: 8px;
 }
 
 [class='dark'] {

@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Dropdown from "./Dropdown";
 import { CustomDropdown } from "./CustomDropdown";
 
 const fonts = ["Arial", "Verdana", "Helvetica", "Times New Roman"];

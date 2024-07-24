@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, MutableRefObject } from "react";
-import "./Dropdown.css";
 import { DropdownArrowIcon } from "./DropdownArrowIcon";
 
 const CustomDropdown = ({ options }: { options: Array<string> }) => {
@@ -35,24 +34,24 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
   }, []);
 
   return (
-    <div className="dropdown-container">
+    <div className="relative">
       <div
-        className="dropdown-header"
+        className="p-2.5 cursor-pointer flex items-center content-between focus:border-none"
         onClick={toggling}
         onKeyDown={onKeyDown}
         tabIndex={0}
       >
         {selectedOption}
         <DropdownArrowIcon
-          className={`dropdown-arrow ${isOpen ? "rotate" : ""}`}
+          className={`w-4 h-4 ml-4 transform ease-linear duration-300 ${isOpen ? "rotate-180" : ""}`}
         />
       </div>
       {isOpen && (
-        <div className="dropdown-list-container">
-          <ul className="dropdown-list">
+        <div className="absolute w-44">
+          <ul className="list-none p-0 m-0 rounded-lg shadow-md">
             {options.map((option) => (
               <li
-                className="dropdown-list-item"
+                className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200"
                 onClick={onOptionClicked(option)}
                 key={option}
               >

@@ -8,7 +8,7 @@ const DropdownArrowIcon = ({ className }: { className: string }) => {
       height="8"
       viewBox="0 0 14 8"
     >
-      <path fill="none" stroke="#A445ED" strokeWidth="1.5" d="m1 2 4 4 4-4" />
+      <path fill="none" stroke="#A445ED" strokeWidth="1.5" d="m1 1 6 6 6-6" />
     </svg>
   );
 };
