@@ -3,9 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { ModeSwitch } from "./darkmode/ModeSwitch";
-import { FontsDropdown, TempFontsDropdown } from "./fonts/FontsDropdown";
+import { FontsDropdown } from "./fonts/FontsDropdown";
 
 const Navbar = () => {
+  const fonts = ["Serif", "Sans", "Mono"];
   return (
     <div className="flex justify-center w-full pt-10">
       <nav className="flex justify-between items-center w-full">
@@ -19,7 +20,7 @@ const Navbar = () => {
           />
         </Link>
         <div className="flex items-center">
-          <TempFontsDropdown />
+          <FontsDropdown fonts={fonts} />
           <div className="border-r border-gray-500 mx-3 h-8"></div>
           <ModeSwitch />
         </div>
