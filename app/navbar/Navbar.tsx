@@ -8,7 +8,7 @@ import { FontsDropdown } from "./fonts/FontsDropdown";
 const Navbar = () => {
   const fonts = ["Serif", "Sans", "Mono"];
   return (
-    <div className="flex justify-center w-full pt-10">
+    <div className="flex justify-center w-full pt-10 pb-10">
       <nav className="flex justify-between items-center w-full">
         <Link href="/">
           <Image
