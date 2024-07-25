@@ -24,6 +24,15 @@ const ModeSwitch = () => {
     setTheme(isDarkMode() ? "light" : "dark");
   };
 
+  const onkeydown = (event: { keyCode: number }) => {
+    switch (event.keyCode) {
+      case 32 /* Space */:
+      case 13 /* Enter */:
+        toggleDarkMode();
+        break;
+    }
+  };
+
   return (
     <div className="flex flex-row gap-4 ml-1">
       <div className="relative inline-block w-10 mr-4 align-middle select-none transition duration-200 ease-in">
@@ -34,13 +43,18 @@ const ModeSwitch = () => {
           className="toggle-checkbox absolute block w-6 h-6 rounded-full appearance-none cursor-pointer transition-transform duration-200 ease-in-out dark:bg-active bg-inactive"
           checked={isDarkMode()}
           onChange={toggleDarkMode}
+          tabIndex={-1}
         />
         {/* This makes a background of toggle, trick is that there is no label text, instead we have the span with a dot which is representing a state of selection */}
         <label
           htmlFor="toggle"
           className="toggle-label block overflow-hidden w-12 h-6 rounded-full cursor-pointer dark:bg-active bg-inactive"
         >
-          <span className="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform duration-200 ease-in-out transform dark:translate-x-6 translate-x-0"></span>
+          <span
+            className="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform duration-200 ease-in-out transform dark:translate-x-6 translate-x-0"
+            tabIndex={0}
+            onKeyDown={onkeydown}
+          ></span>
         </label>
       </div>
       <MoonIcon stroke={strokeColor} />
