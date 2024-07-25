@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, MutableRefObject } from "react";
 import { DropdownArrowIcon } from "./DropdownArrowIcon";
+import { modulo } from "@/app/utils/math";
 
 const CustomDropdown = ({ options }: { options: Array<string> }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +10,9 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
   const dropdownRef: MutableRefObject<any> = useRef(null);
   const firstItemRef: MutableRefObject<any> = useRef(null);
   const lastItemRef: MutableRefObject<any> = useRef(null);
-  const itemRefs = useRef(options.map(() => React.createRef()));
+  const itemRefs: MutableRefObject<MutableRefObject<any>[]> = useRef(
+    options.map(() => React.createRef()),
+  );
 
   const toggling = () => setIsOpen(!isOpen);
 
@@ -19,17 +22,31 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
   };
 
   const focusOnFirstItem = () => {
-    if (isOpen && firstItemRef.current && arrowPressedOnContainer === "down")
-      firstItemRef.current.focus();
+    if (isOpen && itemRefs.current[0] && arrowPressedOnContainer === "down")
+      itemRefs.current[0].current.focus();
   };
 
   const focusOnLastItem = () => {
-    if (isOpen && lastItemRef.current && arrowPressedOnContainer === "up")
-      lastItemRef.current.focus();
+    if (
+      isOpen &&
+      itemRefs.current[options.length - 1] &&
+      arrowPressedOnContainer === "up"
+    )
+      itemRefs.current[options.length - 1].current.focus();
   };
 
   const focusOnDropdown = () => {
     if (!isOpen && dropdownRef.current) dropdownRef.current.focus();
+  };
+
+  const moveFocusToNextItem = (index: number) => {
+    const nextIndex = modulo(index + 1, options.length);
+    itemRefs.current[nextIndex].current.focus();
+  };
+
+  const moveFocusToPreviousItem = (index: number) => {
+    const nextIndex = modulo(index - 1, options.length);
+    itemRefs.current[nextIndex].current.focus();
   };
 
   const onKeyDownContainer = (event: { keyCode: number }) => {
@@ -54,13 +71,23 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
     }
   };
 
-  const onKeDownItem = (event: { keyCode: number }) => {
-    switch (event.keyCode) {
-      case 27 /* ESC */:
-        setIsOpen(false);
-        break;
-    }
-  };
+  const onKeDownItem =
+    (index: number) =>
+    (event: { keyCode: number; preventDefault: () => void }) => {
+      switch (event.keyCode) {
+        case 27 /* ESC */:
+          setIsOpen(false);
+          break;
+        case 40 /* Arrow Down */:
+          event.preventDefault();
+          moveFocusToNextItem(index);
+          break;
+        case 38 /* Arrow Up */:
+          event.preventDefault();
+          moveFocusToPreviousItem(index);
+          break;
+      }
+    };
 
   const handleClickOutside = (event: { target: any }) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -105,14 +132,8 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
                 className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-active font-bold"
                 onClick={onOptionClicked(option)}
                 key={option}
-                onKeyDown={onKeDownItem}
-                ref={
-                  index === 0
-                    ? firstItemRef
-                    : index === options.length - 1
-                      ? lastItemRef
-                      : null
-                }
+                onKeyDown={onKeDownItem(index)}
+                ref={itemRefs.current[index]}
                 tabIndex={0}
               >
                 {option}
