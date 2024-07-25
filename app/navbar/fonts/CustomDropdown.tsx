@@ -8,8 +8,6 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
   /* Needed for decision on what item in the list focus on, accorrding to WAI-ARIA arrow down should open menu and focus on first element on the list, arrow up should open menu and focus on last element of the list */
   const [arrowPressedOnContainer, setArrowPressed] = useState("");
   const dropdownRef: MutableRefObject<any> = useRef(null);
-  const firstItemRef: MutableRefObject<any> = useRef(null);
-  const lastItemRef: MutableRefObject<any> = useRef(null);
   const itemRefs: MutableRefObject<MutableRefObject<any>[]> = useRef(
     options.map(() => React.createRef()),
   );
@@ -22,16 +20,11 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
   };
 
   const focusOnFirstItem = () => {
-    if (isOpen && itemRefs.current[0] && arrowPressedOnContainer === "down")
-      itemRefs.current[0].current.focus();
+    if (isOpen && itemRefs.current[0]) itemRefs.current[0].current.focus();
   };
 
   const focusOnLastItem = () => {
-    if (
-      isOpen &&
-      itemRefs.current[options.length - 1] &&
-      arrowPressedOnContainer === "up"
-    )
+    if (isOpen && itemRefs.current[options.length - 1])
       itemRefs.current[options.length - 1].current.focus();
   };
 
@@ -39,12 +32,12 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
     if (!isOpen && dropdownRef.current) dropdownRef.current.focus();
   };
 
-  const moveFocusToNextItem = (index: number) => {
+  const focusOnNextItem = (index: number) => {
     const nextIndex = modulo(index + 1, options.length);
     itemRefs.current[nextIndex].current.focus();
   };
 
-  const moveFocusToPreviousItem = (index: number) => {
+  const focusOnPrevItem = (index: number) => {
     const nextIndex = modulo(index - 1, options.length);
     itemRefs.current[nextIndex].current.focus();
   };
@@ -56,7 +49,6 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
         break;
       case 32 /* Space */:
       case 40 /* Arrow Down */:
-      case 39 /* Arrow Right */:
       case 13 /* Enter */:
         setArrowPressed("down");
         setIsOpen(true);
@@ -74,17 +66,25 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
   const onKeDownItem =
     (index: number) =>
     (event: { keyCode: number; preventDefault: () => void }) => {
+      event.preventDefault();
       switch (event.keyCode) {
         case 27 /* ESC */:
           setIsOpen(false);
           break;
         case 40 /* Arrow Down */:
-          event.preventDefault();
-          moveFocusToNextItem(index);
+          focusOnNextItem(index);
           break;
         case 38 /* Arrow Up */:
-          event.preventDefault();
-          moveFocusToPreviousItem(index);
+          focusOnPrevItem(index);
+          break;
+        case 36 /* Home */:
+          focusOnFirstItem();
+          break;
+        case 35 /* End */:
+          focusOnLastItem();
+          break;
+        case 9 /* Tab */:
+          setIsOpen(false);
           break;
       }
     };
