@@ -4,7 +4,12 @@ import { DropdownArrowIcon } from "./DropdownArrowIcon";
 const CustomDropdown = ({ options }: { options: Array<string> }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
+  /* Needed for decision on what item in the list focus on, accorrding to WAI-ARIA arrow down should open menu and focus on first element on the list, arrow up should open menu and focus on last element of the list */
+  const [arrowPressedOnContainer, setArrowPressed] = useState("");
   const dropdownRef: MutableRefObject<any> = useRef(null);
+  const firstItemRef: MutableRefObject<any> = useRef(null);
+  const lastItemRef: MutableRefObject<any> = useRef(null);
+  const itemRefs = useRef(options.map(() => React.createRef()));
 
   const toggling = () => setIsOpen(!isOpen);
 
@@ -13,10 +18,47 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
     setIsOpen(false);
   };
 
-  const onKeyDown = (event: { keyCode: number }) => {
-    if (event.keyCode === 27) {
-      // Escape key
-      setIsOpen(false);
+  const focusOnFirstItem = () => {
+    if (isOpen && firstItemRef.current && arrowPressedOnContainer === "down")
+      firstItemRef.current.focus();
+  };
+
+  const focusOnLastItem = () => {
+    if (isOpen && lastItemRef.current && arrowPressedOnContainer === "up")
+      lastItemRef.current.focus();
+  };
+
+  const focusOnDropdown = () => {
+    if (!isOpen && dropdownRef.current) dropdownRef.current.focus();
+  };
+
+  const onKeyDownContainer = (event: { keyCode: number }) => {
+    switch (event.keyCode) {
+      case 27 /* ESC */:
+        setIsOpen(false);
+        break;
+      case 32 /* Space */:
+      case 40 /* Arrow Down */:
+      case 39 /* Arrow Right */:
+      case 13 /* Enter */:
+        setArrowPressed("down");
+        setIsOpen(true);
+        break;
+      case 38 /* Arrow Up */:
+        setArrowPressed("up");
+        setIsOpen(true);
+        break;
+      case 9 /* Tab */:
+        setIsOpen(false);
+        break;
+    }
+  };
+
+  const onKeDownItem = (event: { keyCode: number }) => {
+    switch (event.keyCode) {
+      case 27 /* ESC */:
+        setIsOpen(false);
+        break;
     }
   };
 
@@ -33,12 +75,21 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
     };
   }, []);
 
+  useEffect(() => {
+    arrowPressedOnContainer === "down" ? focusOnFirstItem() : focusOnLastItem();
+  }, [isOpen, arrowPressedOnContainer]);
+
+  useEffect(() => {
+    focusOnDropdown();
+  }, [isOpen]);
+
   return (
-    <div className="relative mr-1" ref={dropdownRef}>
+    <div className="relative mr-1">
       <div
+        ref={dropdownRef}
         className="p-2.5 cursor-pointer flex items-center content-between font-bold"
         onClick={toggling}
-        onKeyDown={onKeyDown}
+        onKeyDown={onKeyDownContainer}
         tabIndex={0}
       >
         {selectedOption}
@@ -49,11 +100,20 @@ const CustomDropdown = ({ options }: { options: Array<string> }) => {
       {isOpen && (
         <div className="absolute w-full">
           <ul className="list-none p-0 m-0 rounded-lg shadow-md dark:shadow-none dark:border dark:border-active">
-            {options.map((option) => (
+            {options.map((option, index) => (
               <li
                 className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-active font-bold"
                 onClick={onOptionClicked(option)}
                 key={option}
+                onKeyDown={onKeDownItem}
+                ref={
+                  index === 0
+                    ? firstItemRef
+                    : index === options.length - 1
+                      ? lastItemRef
+                      : null
+                }
+                tabIndex={0}
               >
                 {option}
               </li>
