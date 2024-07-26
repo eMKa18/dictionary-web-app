@@ -2,21 +2,27 @@
 import React, { useRef, useState, useEffect, MutableRefObject } from "react";
 import { DropdownArrowIcon } from "./DropdownArrowIcon";
 import { modulo } from "@/app/utils/math";
+import { useFont } from "@/app/FontContext";
 
-const FontsDropdown = ({ options }: { options: Array<string> }) => {
+const FontsDropdown = ({
+  fonts,
+}: {
+  fonts: { name: string; font: string }[];
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(fonts[0]);
   /* Needed for decision on what item in the list focus on, accorrding to WAI-ARIA arrow down should open menu and focus on first element on the list, arrow up should open menu and focus on last element of the list */
   const [arrowPressedOnContainer, setArrowPressed] = useState("");
   const dropdownRef: MutableRefObject<any> = useRef(null);
   const itemRefs: MutableRefObject<MutableRefObject<any>[]> = useRef(
-    options.map(() => React.createRef()),
+    fonts.map(() => React.createRef()),
   );
-
+  const { setFont } = useFont();
   const toggling = () => setIsOpen(!isOpen);
 
-  const onOptionClicked = (value: string) => () => {
+  const onOptionClicked = (value: { name: string; font: string }) => () => {
     setSelectedOption(value);
+    setFont(value.name.toLowerCase());
     setIsOpen(false);
   };
 
@@ -25,8 +31,8 @@ const FontsDropdown = ({ options }: { options: Array<string> }) => {
   };
 
   const focusOnLastItem = () => {
-    if (isOpen && itemRefs.current[options.length - 1])
-      itemRefs.current[options.length - 1].current.focus();
+    if (isOpen && itemRefs.current[fonts.length - 1])
+      itemRefs.current[fonts.length - 1].current.focus();
   };
 
   const focusOnDropdown = () => {
@@ -34,12 +40,12 @@ const FontsDropdown = ({ options }: { options: Array<string> }) => {
   };
 
   const focusOnNextItem = (index: number) => {
-    const nextIndex = modulo(index + 1, options.length);
+    const nextIndex = modulo(index + 1, fonts.length);
     itemRefs.current[nextIndex].current.focus();
   };
 
   const focusOnPrevItem = (index: number) => {
-    const nextIndex = modulo(index - 1, options.length);
+    const nextIndex = modulo(index - 1, fonts.length);
     itemRefs.current[nextIndex].current.focus();
   };
 
@@ -82,7 +88,7 @@ const FontsDropdown = ({ options }: { options: Array<string> }) => {
         focusOnLastItem();
         break;
       case 13 /* Enter */:
-        setSelectedOption(options[index]);
+        setSelectedOption(fonts[index]);
         setIsOpen(false);
         break;
     }
@@ -118,7 +124,7 @@ const FontsDropdown = ({ options }: { options: Array<string> }) => {
         onKeyDown={onKeyDownContainer}
         tabIndex={0}
       >
-        {selectedOption}
+        {selectedOption.name}
         <DropdownArrowIcon
           className={`w-4 h-4 ml-4 transform ease-linear duration-300 ${isOpen ? "rotate-180" : ""}`}
         />
@@ -126,16 +132,16 @@ const FontsDropdown = ({ options }: { options: Array<string> }) => {
       {isOpen && (
         <div className="absolute w-full">
           <ul className="list-none p-0 m-0 rounded-lg shadow-md dark:shadow-none dark:border dark:border-active">
-            {options.map((option, index) => (
+            {fonts.map((option, index) => (
               <li
                 className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-active font-bold"
                 onMouseDown={onOptionClicked(option)}
-                key={option}
+                key={option.name}
                 onKeyDown={onKeDownItem(index)}
                 ref={itemRefs.current[index]}
                 tabIndex={0}
               >
-                {option}
+                {option.name}
               </li>
             ))}
           </ul>
