@@ -4,7 +4,7 @@ export const Dictionary = () => {
       <div className="relative w-full">
         <input className="w-full bg-input dark:bg-input-dark p-4 rounded-2xl"></input>
         <button
-          className="absolute inset-y-0 right-0 mr-10 flex items-center justify-center h-full w-10"
+          className="absolute inset-y-0 right-0 mr-4 flex items-center justify-center h-full w-10"
           onClick={() => console.log("click!")}
         >
           <img src="/images/icon-search.svg"></img>
