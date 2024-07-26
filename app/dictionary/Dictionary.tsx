@@ -1,8 +1,15 @@
 export const Dictionary = () => {
   return (
-    <div className="flex justify-center flex-col w-full">
-      <input className="w-full m-4 bg-input dark:bg-input-dark p-4 rounded-2xl"></input>
-      <img src="/images/icon-search.svg"></img>
+    <div className="flex justify-center items-center flex-col w-full">
+      <div className="relative w-full">
+        <input className="w-full bg-input dark:bg-input-dark p-4 rounded-2xl"></input>
+        <button
+          className="absolute inset-y-0 right-0 mr-10 flex items-center justify-center h-full w-10"
+          onClick={() => console.log("click!")}
+        >
+          <img src="/images/icon-search.svg"></img>
+        </button>
+      </div>
       <h1>Word {"   "}</h1>
       <h2>phonetic</h2>
       <ul>
