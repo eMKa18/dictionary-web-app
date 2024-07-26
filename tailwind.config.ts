@@ -12,7 +12,6 @@ const config = {
     extend: {
       colors: {
         border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -45,7 +44,9 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         inactive: "#767676",
-        active: "#a644ee"
+        active: "#a644ee",
+        input: "#f4f4f4",
+        "input-dark" : "#1f1f1f",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -66,11 +67,6 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-      fontFamily: {
-        sans: ['var(--font-inter)'],
-        mono: ['var(--font-lora)'],
-        serif: ['var(--font-inconsolata)']
-      }
     },
   },
   plugins: [require("tailwindcss-animate")],
