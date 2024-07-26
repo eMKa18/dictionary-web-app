@@ -81,7 +81,8 @@ const FontsDropdown = ({ options }: { options: Array<string> }) => {
       case 35 /* End */:
         focusOnLastItem();
         break;
-      case 9 /* Tab */:
+      case 13 /* Enter */:
+        setSelectedOption(options[index]);
         setIsOpen(false);
         break;
     }
@@ -128,7 +129,7 @@ const FontsDropdown = ({ options }: { options: Array<string> }) => {
             {options.map((option, index) => (
               <li
                 className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-active font-bold"
-                onClick={onOptionClicked(option)}
+                onMouseDown={onOptionClicked(option)}
                 key={option}
                 onKeyDown={onKeDownItem(index)}
                 ref={itemRefs.current[index]}
