@@ -131,7 +131,7 @@ const FontsDropdown = ({
       </div>
       {isOpen && (
         <div className="absolute w-full">
-          <ul className="list-none p-0 m-0 rounded-lg shadow-md dark:shadow-none dark:border dark:border-active">
+          <ul className="list-none p-0 m-0 rounded-lg shadow-md dark:shadow-none dark:border dark:border-active bg-white dark:bg-black">
             {fonts.map((option, index) => (
               <li
                 className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-active font-bold"
