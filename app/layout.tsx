@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { inter } from "./fonts";
+import { lora } from "./fonts";
 import { FontProvider } from "./FontContext";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className}`}>
+      <body className={`${lora.className}`}>
         <ThemeProvider attribute="class">
           <FontProvider>{children}</FontProvider>
         </ThemeProvider>
