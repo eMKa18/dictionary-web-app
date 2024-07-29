@@ -4,6 +4,7 @@ import { useFont } from "./FontContext";
 import { FontKey, fontsmap } from "./fonts";
 import Navbar from "./navbar/Navbar";
 import { Dictionary } from "./dictionary/Dictionary";
+import { DictionaryProvider } from "./DictionaryContext";
 
 export default function Home() {
   const { font } = useFont();
@@ -14,7 +15,9 @@ export default function Home() {
       className={`w-1/2 flex flex-col items-center mobile ${selectedFont.className}`}
     >
       <Navbar></Navbar>
-      <Dictionary />
+      <DictionaryProvider>
+        <Dictionary />
+      </DictionaryProvider>
     </main>
   );
 }

@@ -13,26 +13,24 @@ import {
   Source,
   Synonym,
 } from "./dictionary-service";
+import { WordSearch } from "./WordSearch";
+import { useDictionary } from "../DictionaryContext";
 
 export const Dictionary = () => {
-  const [dictionary, setDictionary] = useState<
-    DictionaryResult | ErrorMessage | null
-  >(null);
-  const [loading, setLoading] = useState(false);
+  const { dictionary } = useDictionary();
 
   useEffect(() => {
-    const fetchDictionaryData = async () => {
-      try {
-        const result = await getDictionaryForWord("keyboard");
-        setDictionary(result);
-        setLoading(false); // Set loading to false after data is fetched
-      } catch (error) {
-        console.error("Failed to fetch dictionary data:", error);
-        setLoading(false); // Ensure loading is set to false even if there is an error
-      }
-    };
-
-    fetchDictionaryData();
+    // const fetchDictionaryData = async () => {
+    //   try {
+    //     const result = await getDictionaryForWord("keyboard");
+    //     setDictionary(result);
+    //     setLoading(false); // Set loading to false after data is fetched
+    //   } catch (error) {
+    //     console.error("Failed to fetch dictionary data:", error);
+    //     setLoading(false); // Ensure loading is set to false even if there is an error
+    //   }
+    // };
+    // fetchDictionaryData();
   }, []);
 
   const hasAudioPhonetic = (dictionary: DictionaryResult) => {
@@ -46,27 +44,10 @@ export const Dictionary = () => {
     return false;
   };
 
-  if (loading) {
-    return <div>Loading...</div>; // Render loading state
-  }
   return (
     <div className="flex justify-center items-center flex-col w-full">
-      <div className="relative w-full z-0">
-        <input className="w-full bg-input dark:bg-input-dark p-4 rounded-2xl"></input>
-        <button
-          className="absolute inset-y-0 right-0 mr-4 flex items-center justify-center h-full w-10"
-          onClick={() => console.log("click!")}
-        >
-          <img src="/images/icon-search.svg"></img>
-        </button>
-      </div>
-      {loading ? (
-        <img
-          src="/images/icon-new-window.svg"
-          className="ml-2"
-          tabIndex={0}
-        ></img>
-      ) : isDictionaryResult(dictionary) ? (
+      <WordSearch />
+      {isDictionaryResult(dictionary) ? (
         <>
           <div className="mt-10 flex items-center justify-between text-left w-full">
             <div>
@@ -155,6 +136,8 @@ export const Dictionary = () => {
       ) : isErrorMessage(dictionary) ? (
         <div className="text-red-700 mt-10 w-full text-center">
           {dictionary.message}
+          <br />
+          {dictionary.resolution}
         </div>
       ) : null}
     </div>

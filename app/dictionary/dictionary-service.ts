@@ -9,7 +9,7 @@ export type Synonyms = Array<Synonym>;
 
 export type PhoneticAudio = {
   audio: string;
-  text: string;
+  text?: string;
   license?: { name: string; url: string };
   sourceUrl?: Source;
 };
@@ -32,7 +32,7 @@ export type Meaning = {
 export type Meanings = Array<Meaning>;
 
 export type DictionaryResult = {
-  phonetic: Phonetic;
+  phonetic?: Phonetic;
   phonetics: Phonetics;
   word: Word;
   sourceUrls: Sources;
@@ -48,7 +48,6 @@ export type ErrorMessage = {
 const isDictionaryResult = (obj: any): obj is DictionaryResult => {
   return (
     obj &&
-    typeof obj.phonetic === "string" &&
     Array.isArray(obj.phonetics) &&
     typeof obj.word === "string" &&
     Array.isArray(obj.sourceUrls) &&
