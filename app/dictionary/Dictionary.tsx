@@ -1,7 +1,7 @@
 export const Dictionary = () => {
   return (
     <div className="flex justify-center items-center flex-col w-full">
-      <div className="relative w-full">
+      <div className="relative w-full z-0">
         <input className="w-full bg-input dark:bg-input-dark p-4 rounded-2xl"></input>
         <button
           className="absolute inset-y-0 right-0 mr-4 flex items-center justify-center h-full w-10"
@@ -10,7 +10,9 @@ export const Dictionary = () => {
           <img src="/images/icon-search.svg"></img>
         </button>
       </div>
-      <h1>Word {"   "}</h1>
+      <div className="mt-10 flex items-start text-left w-full border border-red-500">
+        <h1 className="font-bold">Word {"   "}</h1>
+      </div>
       <h2>phonetic</h2>
       <ul>
         <li>

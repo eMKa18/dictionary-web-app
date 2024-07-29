@@ -116,7 +116,7 @@ const FontsDropdown = ({
   }, [isOpen]);
 
   return (
-    <div className="relative mr-1">
+    <div className="relative mr-1 z-[1000]">
       <div
         ref={dropdownRef}
         className="p-2.5 cursor-pointer flex items-center content-between font-bold"
@@ -134,7 +134,7 @@ const FontsDropdown = ({
           <ul className="list-none p-0 m-0 rounded-lg shadow-md dark:shadow-none dark:border dark:border-active bg-white dark:bg-black">
             {fonts.map((option, index) => (
               <li
-                className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-active font-bold"
+                className="p-2.5 cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-active font-bold "
                 onMouseDown={onOptionClicked(option)}
                 key={option.name}
                 onKeyDown={onKeDownItem(index)}
