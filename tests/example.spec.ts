@@ -5,9 +5,9 @@ test.describe("page loads", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:3000/");
   });
-  test("dropdown shows options", async ({ page }) => {
+  test("link navigates to main page", async ({ page }) => {
     await page.getByRole("link", { name: "Logo" }).click();
 
-    await expect(page.url()).toEqual("http://localhost:3000/");
+    await expect(page).toHaveTitle(/Dictionary Web App/);
   });
 });
