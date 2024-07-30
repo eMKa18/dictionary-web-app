@@ -20,7 +20,7 @@ function RootLayout({
       <body className={`${lora.className}`}>
         <ThemeProvider attribute="class">
           <FontProvider>
-            <AxeInitializer />
+            {/* <AxeInitializer /> */}
             {children}
           </FontProvider>
         </ThemeProvider>
