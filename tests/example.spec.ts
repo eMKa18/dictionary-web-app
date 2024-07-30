@@ -34,4 +34,20 @@ test.describe("navigation", () => {
     await page.getByLabel("darkmodeswitch").click();
     await expect(page.getByRole("checkbox")).toBeChecked();
   });
+
+  test("checks if input will cause the content to show using keyboard's enter", async ({
+    page,
+  }) => {
+    await page.getByPlaceholder("Search any word").fill("keyboard");
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("heading", { name: "keyboard" })).toBeVisible();
+  });
+
+  test("checks if input will cause the content to show using dedicated search button", async ({
+    page,
+  }) => {
+    await page.getByPlaceholder("Search any word").fill("keyboard");
+    await page.getByRole("button", { name: "Search" }).click();
+    await expect(page.getByRole("heading", { name: "keyboard" })).toBeVisible();
+  });
 });
