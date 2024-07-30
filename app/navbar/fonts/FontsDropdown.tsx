@@ -123,6 +123,7 @@ const FontsDropdown = ({
         onClick={toggling}
         onKeyDown={onKeyDownContainer}
         tabIndex={0}
+        role="button"
       >
         {selectedOption.name}
         <DropdownArrowIcon
@@ -140,6 +141,7 @@ const FontsDropdown = ({
                 onKeyDown={onKeDownItem(index)}
                 ref={itemRefs.current[index]}
                 tabIndex={0}
+                title={option.name}
               >
                 {option.name}
               </li>
