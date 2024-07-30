@@ -1,7 +1,19 @@
-import { DictionaryResult, PhoneticAudio } from "./dictionary-service";
-import { getPhonetic, hasAudioPhonetic } from "./utils/phonetic";
+"use client";
+import { MutableRefObject, useRef } from "react";
+import { DictionaryResult } from "./dictionary-service";
+import {
+  getPhonetic,
+  getPhoneticAudio,
+  hasAudioPhonetic,
+} from "./utils/phonetic";
 
 const Phonetic = ({ dictionary }: { dictionary: DictionaryResult }) => {
+  const audioRef: MutableRefObject<any> = useRef();
+  const play = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
   return (
     <div className="mt-10 flex items-center justify-between text-left w-full">
       <div>
@@ -10,9 +22,12 @@ const Phonetic = ({ dictionary }: { dictionary: DictionaryResult }) => {
       </div>
       {dictionary.phonetics?.length > 0 && hasAudioPhonetic(dictionary) && (
         <div>
-          <button>
+          <button onClick={play}>
             <img src="/images/icon-play.svg"></img>
-            {/* How to play aduio??? */}
+            <audio
+              src={getPhoneticAudio(dictionary)?.audio}
+              ref={audioRef}
+            ></audio>
           </button>
         </div>
       )}
