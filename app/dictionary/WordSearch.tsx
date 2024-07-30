@@ -28,12 +28,15 @@ const WordSearch = () => {
     const result = await getDictionaryForWord(
       event.target.elements.search.value,
     );
-    console.dir(result);
     setDictionary(result);
   };
 
   const handleSearchChange = (event: { target: { value: string } }) => {
     setSearchTerm(event.target.value);
+  };
+
+  const preventSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
   };
 
   return (
@@ -44,6 +47,7 @@ const WordSearch = () => {
         type="text"
         value={searchTerm}
         onChange={handleSearchChange}
+        onSubmit={preventSubmit}
       ></input>
       <button
         className="absolute inset-y-0 right-0 mr-4 flex items-center justify-center h-full w-10"
