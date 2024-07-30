@@ -2,11 +2,7 @@
 
 import { useState } from "react";
 import { useDictionary } from "../DictionaryContext";
-import {
-  DictionaryResult,
-  ErrorMessage,
-  getDictionaryForWord,
-} from "./dictionary-service";
+import { getDictionaryForWord } from "./dictionary-service";
 
 const WordSearch = () => {
   const { setDictionary } = useDictionary();
@@ -48,6 +44,8 @@ const WordSearch = () => {
       <button
         className="absolute inset-y-0 right-0 mr-4 flex items-center justify-center h-full w-10"
         type="submit"
+        aria-label="search"
+        role="button"
       >
         <img src="/images/icon-search.svg" alt="Search"></img>
       </button>
