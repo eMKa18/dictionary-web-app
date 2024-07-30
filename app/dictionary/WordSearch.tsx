@@ -35,10 +35,6 @@ const WordSearch = () => {
     setSearchTerm(event.target.value);
   };
 
-  const preventSubmit = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-  };
-
   return (
     <form className="relative w-full z-0" onSubmit={searchWord}>
       <input
@@ -47,7 +43,7 @@ const WordSearch = () => {
         type="text"
         value={searchTerm}
         onChange={handleSearchChange}
-        onSubmit={preventSubmit}
+        onSubmit={(event) => event.preventDefault()}
       ></input>
       <button
         className="absolute inset-y-0 right-0 mr-4 flex items-center justify-center h-full w-10"
