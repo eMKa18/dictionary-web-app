@@ -50,4 +50,12 @@ test.describe("navigation", () => {
     await page.getByRole("button", { name: "Search" }).click();
     await expect(page.getByRole("heading", { name: "keyboard" })).toBeVisible();
   });
+
+  test("checks if input will cause the audio icon to show", async ({
+    page,
+  }) => {
+    await page.getByPlaceholder("Search any word").fill("keyboard");
+    await page.getByRole("button", { name: "Search" }).click();
+    await expect(page.getByRole("button", { name: "Play" })).toBeVisible();
+  });
 });
