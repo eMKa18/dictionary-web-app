@@ -28,4 +28,10 @@ test.describe("navigation", () => {
 
     await expect(page.getByRole("button", { name: "Mono" })).toBeVisible();
   });
+
+  test("checks if darkmode switch works", async ({ page }) => {
+    await expect(page.getByRole("checkbox")).not.toBeChecked();
+    await page.getByLabel("darkmodeswitch").click();
+    await expect(page.getByRole("checkbox")).toBeChecked();
+  });
 });

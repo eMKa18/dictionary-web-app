@@ -24,7 +24,7 @@ const ModeSwitch = () => {
     setTheme(isDarkMode() ? "light" : "dark");
   };
 
-  const onkeydown = (event: { keyCode: number }) => {
+  const onKeyDown = (event: { keyCode: number }) => {
     switch (event.keyCode) {
       case 32 /* Space */:
       case 13 /* Enter */:
@@ -44,7 +44,6 @@ const ModeSwitch = () => {
           checked={isDarkMode()}
           onChange={toggleDarkMode}
           tabIndex={-1}
-          aria-label="darkmodeswitch"
         />
         {/* This makes a background of toggle, trick is that there is no label text, instead we have the span with a dot which is representing a state of selection */}
         <label
@@ -54,7 +53,8 @@ const ModeSwitch = () => {
           <span
             className="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform duration-200 ease-in-out transform dark:translate-x-6 translate-x-0"
             tabIndex={0}
-            onKeyDown={onkeydown}
+            onKeyDown={onKeyDown}
+            aria-label="darkmodeswitch"
           ></span>
         </label>
       </div>
