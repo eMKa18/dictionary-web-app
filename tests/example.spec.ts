@@ -19,4 +19,13 @@ test.describe("navigation", () => {
     for (const option of options)
       await expect(page.getByRole("listitem", { name: option })).toBeVisible();
   });
+
+  test("dropdown changes value after clicking on one of the options", async ({
+    page,
+  }) => {
+    await page.getByRole("button", { name: "Serif" }).click();
+    await page.getByRole("listitem", { name: "Mono" }).click();
+
+    await expect(page.getByRole("button", { name: "Mono" })).toBeVisible();
+  });
 });
