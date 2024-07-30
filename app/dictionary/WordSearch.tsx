@@ -40,6 +40,7 @@ const WordSearch = () => {
         value={searchTerm}
         onChange={handleSearchChange}
         onSubmit={(event) => event.preventDefault()}
+        aria-label="search"
       ></input>
       <button
         className="absolute inset-y-0 right-0 mr-4 flex items-center justify-center h-full w-10"

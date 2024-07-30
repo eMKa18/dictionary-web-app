@@ -44,6 +44,7 @@ const ModeSwitch = () => {
           checked={isDarkMode()}
           onChange={toggleDarkMode}
           tabIndex={-1}
+          aria-label="darkmodeswitch"
         />
         {/* This makes a background of toggle, trick is that there is no label text, instead we have the span with a dot which is representing a state of selection */}
         <label
