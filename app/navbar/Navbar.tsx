@@ -16,7 +16,7 @@ const Navbar = () => {
       <nav className="flex justify-between items-center w-full">
         <Link href="/">
           <Image
-            src="/images/logo.svg"
+            src="./dictionary-web-app/images/logo.svg"
             alt="Logo"
             width={50}
             height={50}

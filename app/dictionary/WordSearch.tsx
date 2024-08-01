@@ -49,7 +49,10 @@ const WordSearch = () => {
         aria-label="search"
         role="button"
       >
-        <img src="/images/icon-search.svg" alt="Search"></img>
+        <img
+          src="./dictionary-web-app/images/icon-search.svg"
+          alt="Search"
+        ></img>
       </button>
     </form>
   );

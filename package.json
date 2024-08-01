@@ -2,6 +2,7 @@
   "name": "dictionary-web-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://emka18.github.io/dictionary-web-app/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
