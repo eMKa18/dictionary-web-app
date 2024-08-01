@@ -23,7 +23,7 @@ const Phonetic = ({ dictionary }: { dictionary: DictionaryResult }) => {
       {dictionary.phonetics?.length > 0 && hasAudioPhonetic(dictionary) && (
         <div>
           <button onClick={play} title="Play">
-            <img src="/images/icon-play.svg"></img>
+            <img src="./images/icon-play.svg"></img>
             <audio
               src={getPhoneticAudio(dictionary)?.audio}
               ref={audioRef}
