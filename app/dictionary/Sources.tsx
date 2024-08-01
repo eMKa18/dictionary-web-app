@@ -25,7 +25,7 @@ const Sources = ({ dictionary }: { dictionary: DictionaryResult }) => {
                 tabIndex={0}
               >
                 <div>{source}</div>
-                <img src="/images/icon-new-window.svg" className="ml-2"></img>
+                <img src="./images/icon-new-window.svg" className="ml-2"></img>
               </Link>
             </li>
           ))}
